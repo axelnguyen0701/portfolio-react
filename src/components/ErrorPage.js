@@ -1,10 +1,11 @@
+import { Container } from "react-bootstrap";
 import { Link, useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
     const error = useRouteError();
 
     return (
-        <div id="error-page">
+        <Container id="error-page">
             <h1>Oops!</h1>
             <p>Sorry, an unexpected error has occurred.</p>
             <p>
@@ -13,6 +14,6 @@ export default function ErrorPage() {
             <Link className="btn btn-primary btn-lg" role="button" to="/">
                 Home
             </Link>
-        </div>
+        </Container>
     );
 }
