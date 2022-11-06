@@ -1,11 +1,26 @@
-import { Button, Card, Col, Container, Row, Modal } from "react-bootstrap";
-import { PencilFill, Trash3Fill } from "react-bootstrap-icons";
+import {
+    Button,
+    Card,
+    Col,
+    Container,
+    Row,
+    Modal,
+    Dropdown,
+} from "react-bootstrap";
+import {
+    PencilFill,
+    ThreeDotsVertical,
+    Trash3Fill,
+} from "react-bootstrap-icons";
 import { deleteProject } from "../services/projects";
 import { useLoaderData } from "react-router-dom";
+import { auth } from "../services/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
 export default function Projects() {
     const projects = useLoaderData();
     const [show, setShow] = useState(false);
+    const [user, loading, erorr] = useAuthState(auth);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -22,36 +37,57 @@ export default function Projects() {
                         <span key={e}>{" " + e + " "}</span>
                     ))}
                 </Card.Text>
-                <Button href={e.link}>Go to app</Button>
-                <Button variant="danger" onClick={handleShow}>
-                    <Trash3Fill />
-                </Button>
-                <Button variant="warning" href={`/project/edit/${e.id}`}>
-                    <PencilFill />
-                </Button>
+                <div className="pb-5">
+                    <Button href={e.link}>Go to app</Button>
+                    {user && (
+                        <Dropdown className="d-inline mx-3">
+                            <Dropdown.Toggle variant="secondary">
+                                <ThreeDotsVertical />
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item
+                                    as="button"
+                                    href={`/project/edit/${e.id}`}
+                                >
+                                    <PencilFill /> Edit
+                                </Dropdown.Item>
+                                <Dropdown.Divider />
+                                <Dropdown.Item
+                                    as="button"
+                                    onClick={handleShow}
+                                    className="text-danger"
+                                >
+                                    <Trash3Fill /> Delete
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    )}
+                </div>
             </Card.Body>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Stop there!</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Are you sure you want to delete project {e.name}?
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button
-                        variant="danger"
-                        onClick={async () => {
-                            await deleteProject({ params: { id: e.id } });
-                            handleClose();
-                        }}
-                    >
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            {user && (
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Stop there!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Are you sure you want to delete project {e.name}?
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button
+                            variant="danger"
+                            onClick={async () => {
+                                await deleteProject({ params: { id: e.id } });
+                                handleClose();
+                            }}
+                        >
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            )}
         </Card>
     ));
 

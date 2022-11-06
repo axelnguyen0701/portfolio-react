@@ -1,10 +1,15 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, Navigate, redirect, useLoaderData } from "react-router-dom";
 import { Button, Container, Form, Image } from "react-bootstrap";
 import { useState } from "react";
 import { updateProject } from "../services/projects";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../services/auth";
+import ErrorPage from "./ErrorPage";
+import UnauthPage from "./UnauthPage";
 
 export default function ProjectEdit() {
     const project = useLoaderData();
+    const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState(project.name);
     const [description, setDescription] = useState(project.description);
     const [link, setLink] = useState(project.link);
@@ -27,6 +32,10 @@ export default function ProjectEdit() {
         setLink("");
         setStacks("");
     };
+
+    if (!user) {
+        return <UnauthPage />;
+    }
 
     return (
         <Container className="d-flex flex-column align-items-center justify-content-center">

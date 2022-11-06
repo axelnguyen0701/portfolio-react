@@ -6,9 +6,12 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { Navigate, redirect } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, Navigate, redirect } from "react-router-dom";
+import { auth } from "../services/auth";
 import app from "../services/firstore";
 import { addProject } from "../services/projects";
+import UnauthPage from "./UnauthPage";
 
 export default function ProjectForm() {
     const [name, setName] = useState("");
@@ -17,6 +20,7 @@ export default function ProjectForm() {
     const [stacks, setStacks] = useState("");
     const [selectedFile, setSelectedFile] = useState();
     const [percent, setPercent] = useState(0);
+    const [user, loading, error] = useAuthState(auth);
 
     const handleFilePicked = (e) => {
         setSelectedFile(e.target.files[0]);
@@ -62,7 +66,9 @@ export default function ProjectForm() {
         setStacks("");
         redirect("/");
     };
-
+    if (!user) {
+        return <UnauthPage />;
+    }
     return (
         <Container className="d-flex flex-column align-items-center justify-content-center">
             <Form style={{ width: "50%", textAlign: "start" }}>
