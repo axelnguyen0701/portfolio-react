@@ -1,24 +1,17 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import app from "../services/firstore";
+import getProjects from "../services/projects";
 
 export default function Projects() {
     const [loading, setLoading] = useState(true);
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        async function getProjects() {
-            const db = getFirestore(app);
-            const querySnapshot = await getDocs(collection(db, "projects"));
-            const toBeProjects = [];
-            querySnapshot.forEach((doc) => {
-                toBeProjects.push(doc.data());
-            });
+        async function setUpProjects() {
             setLoading(false);
-            setProjects(toBeProjects);
+            setProjects(await getProjects());
         }
-        getProjects();
+        setUpProjects();
     }, []);
 
     const renderedProjects = projects.map((e) => (
