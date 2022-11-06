@@ -10,12 +10,12 @@ export default function NavBar() {
                     <Navbar.Brand>Portfolio</Navbar.Brand>
                 </Link>
                 <Nav className="me-auto">
-                    <Nav.Link>
-                        <Link to="/project"> Projects</Link>
-                    </Nav.Link>
-                    <Nav.Link>
-                        <Link to="/new/project">New</Link>
-                    </Nav.Link>
+                    <Link to="/project" className="nav-link">
+                        Projects
+                    </Link>
+                    <Link to="/new/project" className="nav-link">
+                        New
+                    </Link>
                 </Nav>
             </Container>
         </Navbar>
