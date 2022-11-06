@@ -1,9 +1,10 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { PencilFill, Trash3Fill } from "react-bootstrap-icons";
-import { useLoaderData } from "react-router-dom";
+import { deleteProject } from "../services/projects";
+import { useLoaderData, useNavigate } from "react-router-dom";
 export default function Projects() {
+    const navigate = useNavigate();
     const projects = useLoaderData();
-
     const renderedProjects = projects.map((e) => (
         <Card style={{ width: "100%" }} className="my-5" key={e.name}>
             <Card.Img src={e.url} alt="Project Screenshot" />
@@ -17,10 +18,16 @@ export default function Projects() {
                     ))}
                 </Card.Text>
                 <Button href={e.link}>Go to app</Button>
-                <Button variant="danger">
+                <Button
+                    variant="danger"
+                    onClick={async () => {
+                        await deleteProject({ params: { id: e.id } });
+                        navigate("/projects");
+                    }}
+                >
                     <Trash3Fill />
                 </Button>
-                <Button variant="warning">
+                <Button variant="warning" href={`/project/edit/${e.id}`}>
                     <PencilFill />
                 </Button>
             </Card.Body>

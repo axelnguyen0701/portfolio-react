@@ -8,7 +8,9 @@ import ProjectForm from "./components/ProjectForm";
 import ErrorPage from "./components/ErrorPage";
 import Info from "./components/Info";
 import Projects from "./components/Projects";
-import { getProjects as projectLoader } from "./services/projects";
+import { getProjects as projectsLoader } from "./services/projects";
+import { getProject as projectLoader } from "./services/projects";
+import ProjectEdit from "./components/ProjectEdit";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -25,8 +27,13 @@ const router = createBrowserRouter([
             },
             {
                 path: "/project",
-                loader: projectLoader,
+                loader: projectsLoader,
                 element: <Projects />,
+            },
+            {
+                path: "/project/edit/:id",
+                loader: projectLoader,
+                element: <ProjectEdit />,
             },
         ],
     },
