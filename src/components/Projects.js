@@ -20,6 +20,7 @@ import { useState } from "react";
 export default function Projects() {
     const projects = useLoaderData();
     const [show, setShow] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [user, loading, erorr] = useAuthState(auth);
 
     const handleClose = () => setShow(false);

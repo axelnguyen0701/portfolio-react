@@ -7,7 +7,7 @@ import {
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, Navigate, redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { auth } from "../services/auth";
 import app from "../services/firstore";
 import { addProject } from "../services/projects";
@@ -20,6 +20,7 @@ export default function ProjectForm() {
     const [stacks, setStacks] = useState("");
     const [selectedFile, setSelectedFile] = useState();
     const [percent, setPercent] = useState(0);
+    // eslint-disable-next-line no-unused-vars
     const [user, loading, error] = useAuthState(auth);
 
     const handleFilePicked = (e) => {

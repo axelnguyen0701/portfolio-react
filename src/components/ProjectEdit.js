@@ -1,10 +1,9 @@
-import { Link, Navigate, redirect, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { Button, Container, Form, Image } from "react-bootstrap";
 import { useState } from "react";
 import { updateProject } from "../services/projects";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../services/auth";
-import ErrorPage from "./ErrorPage";
 import UnauthPage from "./UnauthPage";
 
 export default function ProjectEdit() {
@@ -13,6 +12,7 @@ export default function ProjectEdit() {
     const [name, setName] = useState(project.name);
     const [description, setDescription] = useState(project.description);
     const [link, setLink] = useState(project.link);
+    // eslint-disable-next-line no-unused-vars
     const [url, setUrl] = useState(project.url);
     const [stacks, setStacks] = useState(project.stacks);
 
@@ -35,6 +35,12 @@ export default function ProjectEdit() {
 
     if (!user) {
         return <UnauthPage />;
+    }
+    if (loading) {
+        return;
+    }
+    if (error) {
+        return error;
     }
 
     return (
