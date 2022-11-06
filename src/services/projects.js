@@ -1,8 +1,9 @@
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 import app from "./firstore";
 
-export default async function getProjects() {
-    const db = getFirestore(app);
+const db = getFirestore(app);
+
+export async function getProjects() {
     const querySnapshot = await getDocs(collection(db, "projects"));
     const projects = [];
     querySnapshot.forEach((doc) => {
@@ -10,4 +11,18 @@ export default async function getProjects() {
     });
 
     return projects;
+}
+
+export async function addProject({ name, description, link, stacks, url }) {
+    try {
+        const docRef = await addDoc(collection(db, "projects"), {
+            name,
+            description,
+            link,
+            stacks: [stacks],
+            url,
+        });
+    } catch (e) {
+        alert(e);
+    }
 }
