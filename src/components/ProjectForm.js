@@ -1,4 +1,3 @@
-import { getFirestore, addDoc, collection } from "firebase/firestore";
 import {
     getDownloadURL,
     getStorage,

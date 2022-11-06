@@ -3,13 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProjectForm from "./components/ProjectForm";
 import ErrorPage from "./components/ErrorPage";
 import Info from "./components/Info";
 import Projects from "./components/Projects";
-
+import { getProjects as projectLoader } from "./services/projects";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -26,6 +25,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/project",
+                loader: projectLoader,
                 element: <Projects />,
             },
         ],
