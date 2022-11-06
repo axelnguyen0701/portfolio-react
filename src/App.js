@@ -5,14 +5,15 @@ import Projects from "./components/Projects";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProjectForm from "./components/ProjectForm";
+import { Outlet } from "react-router-dom";
 
 function App() {
     return (
         <div className="App">
             <NavBar />
-            <Info />
-            <ProjectForm />
-            <Projects />
+            <div>
+                <Outlet />
+            </div>
         </div>
     );
 }
