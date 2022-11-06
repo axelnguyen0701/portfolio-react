@@ -17,7 +17,6 @@ export async function getProjects() {
     const querySnapshot = await getDocs(collection(db, "projects"));
     const projects = [];
     querySnapshot.forEach((doc) => {
-        console.log(doc.data());
         projects.push({ ...doc.data(), id: doc.id });
     });
 
@@ -28,7 +27,7 @@ export async function getProject({ params }) {
     const docRef = doc(db, "projects", params.id);
     const docSnap = await getDoc(docRef);
 
-    return docSnap.data();
+    return { ...docSnap.data(), id: params.id };
 }
 
 export async function addProject({ name, description, link, stacks, url }) {
@@ -55,6 +54,7 @@ export async function updateProject({
     id,
 }) {
     const projectRef = doc(db, "projects", id);
+
     await updateDoc(projectRef, {
         name,
         description,

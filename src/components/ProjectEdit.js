@@ -31,6 +31,9 @@ export default function ProjectEdit() {
     return (
         <Container className="d-flex flex-column align-items-center justify-content-center">
             <Form style={{ width: "50%", textAlign: "start" }}>
+                <h1 className="text-center">
+                    Edit {project.name} to {name}
+                </h1>
                 <Form.Group>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -39,7 +42,6 @@ export default function ProjectEdit() {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Group>
-
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                     type="text"

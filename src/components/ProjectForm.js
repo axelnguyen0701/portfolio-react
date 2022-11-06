@@ -6,6 +6,7 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { Navigate, redirect } from "react-router-dom";
 import app from "../services/firstore";
 import { addProject } from "../services/projects";
 
@@ -45,7 +46,7 @@ export default function ProjectForm() {
                 getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
                     const project = { name, link, stacks, url, description };
                     //After get the link then add the project to firestore
-                    addProject(project);
+                    await addProject(project);
                 });
             }
         );
@@ -59,6 +60,7 @@ export default function ProjectForm() {
         setDescription("");
         setLink("");
         setStacks("");
+        redirect("/");
     };
 
     return (
