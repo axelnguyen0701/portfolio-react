@@ -13,7 +13,7 @@ import {
     Trash3Fill,
 } from "react-bootstrap-icons";
 import { deleteProject } from "../services/projects";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { auth } from "../services/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
@@ -46,11 +46,10 @@ export default function Projects() {
                                 <ThreeDotsVertical />
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item
-                                    as="button"
-                                    href={`/project/edit/${e.id}`}
-                                >
-                                    <PencilFill /> Edit
+                                <Dropdown.Item>
+                                    <Link to={`/project/edit/${e.id}`}>
+                                        <PencilFill /> Edit
+                                    </Link>
                                 </Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item
