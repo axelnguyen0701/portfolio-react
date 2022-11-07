@@ -46,7 +46,7 @@ export default function Projects() {
                                 <ThreeDotsVertical />
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item>
+                                <Dropdown.Item as="button">
                                     <Link to={`/project/edit/${e.id}`}>
                                         <PencilFill /> Edit
                                     </Link>

@@ -49,7 +49,13 @@ export default function ProjectForm() {
             () => {
                 // download url
                 getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-                    const project = { name, link, stacks, url, description };
+                    const project = {
+                        name,
+                        link,
+                        stacks: stacks.split(" "),
+                        url,
+                        description,
+                    };
                     //After get the link then add the project to firestore
                     await addProject(project);
                 });

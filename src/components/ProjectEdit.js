@@ -14,7 +14,7 @@ export default function ProjectEdit() {
     const [link, setLink] = useState(project.link);
     // eslint-disable-next-line no-unused-vars
     const [url, setUrl] = useState(project.url);
-    const [stacks, setStacks] = useState(project.stacks);
+    const [stacks, setStacks] = useState(project.stacks.join(" "));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +22,7 @@ export default function ProjectEdit() {
             name,
             description,
             link,
-            stacks,
+            stacks: stacks.split(" "),
             url,
             id: project.id,
         });

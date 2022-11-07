@@ -35,7 +35,7 @@ export async function addProject({ name, description, link, stacks, url }) {
             name,
             description,
             link,
-            stacks: [stacks],
+            stacks,
             url,
         });
         return docRef;
