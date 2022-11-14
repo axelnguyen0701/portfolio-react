@@ -6,4 +6,4 @@
   - 🏞️ Image uploading (thanks firebase storage 💿)
 ## ✅ Testing (who would have thought?)
   - You can run the test with `npm test`
-  - I wanted to make sure that all firestore opeations are running well so I wrote some test (how thoughtful 😤)
+  - I wanted to make sure that all firestore operations are running well so I wrote some test (how thoughtful 😤)
