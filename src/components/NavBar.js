@@ -14,19 +14,24 @@ export default function NavBar() {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Link to="/">
-                    <Navbar.Brand>Portfolio</Navbar.Brand>
-                </Link>
-                <Nav className="me-auto">
-                    <Link to="/project" className="nav-link">
-                        Projects
-                    </Link>
-                    {user && (
-                        <Link to="/new/project" className="nav-link">
-                            New
-                        </Link>
-                    )}
-                </Nav>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Navbar.Brand as={Link} to="/">
+                        Portfolio
+                    </Navbar.Brand>
+                    <Nav className="me-auto">
+                        <Nav.Link as={Link} to="/project">
+                            Projects
+                        </Nav.Link>
+
+                        {user && (
+                            <Nav.Link as={Link} to="/new/project">
+                                New
+                            </Nav.Link>
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
+
                 <Nav>
                     {!loading && !!user ? (
                         <div>
