@@ -78,6 +78,7 @@ export default function ProjectForm() {
     }
     return (
         <Container className="d-flex flex-column align-items-center justify-content-center">
+            <h1>Post new portfolio</h1>
             <Form style={{ width: "50%", textAlign: "start" }}>
                 <Form.Group>
                     <Form.Label>Name</Form.Label>

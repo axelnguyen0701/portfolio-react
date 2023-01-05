@@ -93,6 +93,7 @@ export default function Projects() {
 
     return (
         <Container>
+            <h1>My Projects</h1>
             <Row>
                 <Col className="justify-content-center align-items-center d-flex flex-column">
                     {renderedProjects}
