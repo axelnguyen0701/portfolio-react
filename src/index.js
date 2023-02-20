@@ -11,6 +11,7 @@ import Projects from "./components/Projects/Projects";
 import { getProjects as projectsLoader } from "./services/projects";
 import { getProject as projectLoader } from "./services/projects";
 import ProjectEdit from "./components/Projects/ProjectEdit";
+import About from "./components/About/About";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/about",
+                element: <About />,
             },
         ],
     },
