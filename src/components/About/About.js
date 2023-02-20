@@ -22,11 +22,11 @@ export default function About() {
         info: "A MacEwan University's graduate with a curios (and weird) mind. I like to make things convenient as I am sometimes could be so lazy. This page is could act as a CMS for me to showcase new projects or even just to edit these lines of introduction cause sometimes I don't wanna code...",
         socialNetwork: {
             github: {
-                link: "https://www.linkedin.com/in/hnguyen0701/",
+                link: "https://www.github.com/axelnguyen0701",
                 name: "Axel's Repos",
             },
             linkedIn: {
-                link: "httpsL//www.github.com/axelnguyen0701",
+                link: "https://www.linkedin.com/in/hnguyen0701/",
                 name: "Hieu Nguyen",
             },
         },
