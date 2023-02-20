@@ -1,10 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { Button, Container, Form, Image } from "react-bootstrap";
 import { useState } from "react";
 import { updateProject } from "../../services/projects";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/auth";
 import UnauthPage from "../Error/UnauthPage";
+import MarkdownEditor from "../Markdown/MarkdownEditor";
 
 export default function ProjectEdit() {
     const project = useLoaderData();
@@ -14,7 +15,7 @@ export default function ProjectEdit() {
     const [link, setLink] = useState(project.link);
     // eslint-disable-next-line no-unused-vars
     const [url, setUrl] = useState(project.url);
-    const [stacks, setStacks] = useState(project.stacks.join(" "));
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +23,6 @@ export default function ProjectEdit() {
             name,
             description,
             link,
-            stacks: stacks.split(" "),
             url,
             id: project.id,
         });
@@ -30,7 +30,7 @@ export default function ProjectEdit() {
         setName("");
         setDescription("");
         setLink("");
-        setStacks("");
+        navigate("/project");
     };
 
     if (!user) {
@@ -57,29 +57,30 @@ export default function ProjectEdit() {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Group>
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                <Form.Label>Link</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={link}
-                    onChange={(e) => setLink(e.target.value)}
-                />
-                <Form.Label>Stack</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={stacks}
-                    onChange={(e) => setStacks(e.target.value)}
-                />
-                <Image src={url} style={{ maxWidth: "100%" }} />
+
+                <Form.Group>
+                    <Form.Label>Link</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={link}
+                        onChange={(e) => setLink(e.target.value)}
+                    />
+                </Form.Group>
+
                 <Form.Group controlId="formFile" className="mb-3">
+                    <Image src={url} style={{ maxWidth: "100%" }} />
                     <Form.Label>Image of the project</Form.Label>
                     <Form.Control type="file" accept="/image/*" />
                 </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Description</Form.Label>
+                    <MarkdownEditor
+                        value={description}
+                        setValue={setDescription}
+                    />
+                </Form.Group>
+
                 <Button
                     onClick={handleSubmit}
                     className="text-center my-2"

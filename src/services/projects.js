@@ -29,13 +29,12 @@ export async function getProject({ params }) {
     return { ...docSnap.data(), id: params.id };
 }
 
-export async function addProject({ name, description, link, stacks, url }) {
+export async function addProject({ name, description, link, url }) {
     try {
         const docRef = await addDoc(collection(db, "projects"), {
             name,
             description,
             link,
-            stacks,
             url,
         });
         return docRef;
@@ -44,21 +43,13 @@ export async function addProject({ name, description, link, stacks, url }) {
     }
 }
 
-export async function updateProject({
-    name,
-    description,
-    link,
-    stacks,
-    url,
-    id,
-}) {
+export async function updateProject({ name, description, link, url, id }) {
     const projectRef = doc(db, "projects", id);
 
     await updateDoc(projectRef, {
         name,
         description,
         link,
-        stacks,
         url,
     });
 }

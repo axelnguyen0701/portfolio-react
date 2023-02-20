@@ -17,6 +17,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import { auth } from "../../services/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
+import MDEditor from "@uiw/react-md-editor";
 export default function Projects() {
     const projects = useLoaderData();
     const [show, setShow] = useState(false);
@@ -28,40 +29,43 @@ export default function Projects() {
 
     const renderedProjects = projects.map((e) => (
         <Card style={{ width: "100%" }} className="my-5" key={e.id}>
+            <Card.Header>
+                <strong>{e.name}</strong>
+                {user && (
+                    <Dropdown className="d-inline mx-3">
+                        <Dropdown.Toggle variant="secondary">
+                            <ThreeDotsVertical />
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item as="button">
+                                <Link to={`/project/edit/${e.id}`}>
+                                    <PencilFill /> Edit
+                                </Link>
+                            </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item
+                                as="button"
+                                onClick={handleShow}
+                                className="text-danger"
+                            >
+                                <Trash3Fill /> Delete
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                )}
+            </Card.Header>
             <Card.Img src={e.url} alt="Project Screenshot" />
+            <hr />
             <Card.Body>
-                <Card.Title>This is project {e.name}</Card.Title>
-                <Card.Text>{e.description}</Card.Text>
-                <Card.Text>
-                    Stacks used:
-                    {e.stacks.map((e) => (
-                        <span key={e}>{" " + e + " "}</span>
-                    ))}
-                </Card.Text>
-                <div className="pb-5">
+                <div className="rounded border text-start">
+                    <MDEditor.Markdown
+                        source={e.description}
+                        style={{ padding: "3rem" }}
+                    />
+                </div>
+
+                <div className="pb-3 mt-3   ">
                     <Button href={e.link}>Go to app</Button>
-                    {user && (
-                        <Dropdown className="d-inline mx-3">
-                            <Dropdown.Toggle variant="secondary">
-                                <ThreeDotsVertical />
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item as="button">
-                                    <Link to={`/project/edit/${e.id}`}>
-                                        <PencilFill /> Edit
-                                    </Link>
-                                </Dropdown.Item>
-                                <Dropdown.Divider />
-                                <Dropdown.Item
-                                    as="button"
-                                    onClick={handleShow}
-                                    className="text-danger"
-                                >
-                                    <Trash3Fill /> Delete
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    )}
                 </div>
             </Card.Body>
             {user && (

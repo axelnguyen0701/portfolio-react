@@ -12,12 +12,12 @@ import { auth } from "../../services/auth";
 import app from "../../services/firstore";
 import { addProject } from "../../services/projects";
 import UnauthPage from "../Error/UnauthPage";
+import MarkdownEditor from "../Markdown/MarkdownEditor";
 
 export default function ProjectForm() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [link, setLink] = useState("");
-    const [stacks, setStacks] = useState("");
     const [selectedFile, setSelectedFile] = useState();
     const [percent, setPercent] = useState(0);
     // eslint-disable-next-line no-unused-vars
@@ -52,7 +52,6 @@ export default function ProjectForm() {
                     const project = {
                         name,
                         link,
-                        stacks: stacks.split(" "),
                         url,
                         description,
                     };
@@ -66,11 +65,21 @@ export default function ProjectForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        uploadFile();
+        if (!!selectedFile) {
+            console.log(!!selectedFile);
+            uploadFile();
+        } else {
+            await addProject({
+                name,
+                link,
+                url: "",
+                description,
+            });
+        }
+
         setName("");
         setDescription("");
         setLink("");
-        setStacks("");
         redirect("/");
     };
     if (!user) {
@@ -88,25 +97,14 @@ export default function ProjectForm() {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Group>
-
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                <Form.Label>Link</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={link}
-                    onChange={(e) => setLink(e.target.value)}
-                />
-                <Form.Label>Stack</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={stacks}
-                    onChange={(e) => setStacks(e.target.value)}
-                />
+                <Form.Group>
+                    <Form.Label>Link</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={link}
+                        onChange={(e) => setLink(e.target.value)}
+                    />
+                </Form.Group>
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Image of the project</Form.Label>
                     <Form.Control
@@ -114,10 +112,19 @@ export default function ProjectForm() {
                         onChange={handleFilePicked}
                         accept="/image/*"
                     />
+                    <p>Percent uploaded: {percent}%</p>
                 </Form.Group>
-                <p>Percent uploaded: {percent}%</p>
+
+                <Form.Group>
+                    <Form.Label>Description</Form.Label>
+                    <MarkdownEditor
+                        value={description}
+                        setValue={setDescription}
+                    />
+                </Form.Group>
+
                 <Button
-                    className="text-center my-2"
+                    className="text-center my-3"
                     variant="primary"
                     type="submit"
                     onClick={handleSubmit}
