@@ -29,6 +29,10 @@ export default function NavBar() {
                                 New
                             </Nav.Link>
                         )}
+
+                        <Nav.Link as={Link} to="/about">
+                            About Me
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
 

@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 import { Button, Container, Form, Image } from "react-bootstrap";
 import { useState } from "react";
-import { updateProject } from "../services/projects";
+import { updateProject } from "../../services/projects";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../services/auth";
-import UnauthPage from "./UnauthPage";
+import { auth } from "../../services/auth";
+import UnauthPage from "../Error/UnauthPage";
 
 export default function ProjectEdit() {
     const project = useLoaderData();

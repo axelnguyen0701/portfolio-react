@@ -8,10 +8,10 @@ import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { redirect } from "react-router-dom";
-import { auth } from "../services/auth";
-import app from "../services/firstore";
-import { addProject } from "../services/projects";
-import UnauthPage from "./UnauthPage";
+import { auth } from "../../services/auth";
+import app from "../../services/firstore";
+import { addProject } from "../../services/projects";
+import UnauthPage from "../Error/UnauthPage";
 
 export default function ProjectForm() {
     const [name, setName] = useState("");

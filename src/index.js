@@ -4,13 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ProjectForm from "./components/ProjectForm";
-import ErrorPage from "./components/ErrorPage";
+import ProjectForm from "./components/Projects/ProjectForm";
+import ErrorPage from "./components/Error/ErrorPage";
 import Info from "./components/Index/Info";
-import Projects from "./components/Projects";
+import Projects from "./components/Projects/Projects";
 import { getProjects as projectsLoader } from "./services/projects";
 import { getProject as projectLoader } from "./services/projects";
-import ProjectEdit from "./components/ProjectEdit";
+import ProjectEdit from "./components/Projects/ProjectEdit";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -34,6 +34,9 @@ const router = createBrowserRouter([
                 path: "/project/edit/:id",
                 loader: projectLoader,
                 element: <ProjectEdit />,
+            },
+            {
+                path: "/about",
             },
         ],
     },

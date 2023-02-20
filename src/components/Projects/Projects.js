@@ -12,9 +12,9 @@ import {
     ThreeDotsVertical,
     Trash3Fill,
 } from "react-bootstrap-icons";
-import { deleteProject } from "../services/projects";
+import { deleteProject } from "../../services/projects";
 import { Link, useLoaderData } from "react-router-dom";
-import { auth } from "../services/auth";
+import { auth } from "../../services/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
 export default function Projects() {
