@@ -3,14 +3,24 @@ import app from "./firstore";
 
 const db = getFirestore(app);
 
-export async function addAbout({ name, description, link, stacks, url }) {
+export async function addAbout({
+    firstName,
+    lastName,
+    nickname,
+    title,
+    worksAt,
+    info,
+    socialNetwork,
+}) {
     try {
-        const docRef = await addAbout(collection(db, "projects"), {
-            name,
-            description,
-            link,
-            stacks,
-            url,
+        const docRef = await addAbout(collection(db, "about"), {
+            firstName,
+            lastName,
+            nickname,
+            title,
+            worksAt,
+            info,
+            socialNetwork,
         });
         return docRef;
     } catch (e) {

@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { Button, Card, Container } from "react-bootstrap";
-import { Github, Linkedin } from "react-bootstrap-icons";
+import { Github, Linkedin, PencilFill } from "react-bootstrap-icons";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../services/auth";
 import Avatar from "./Avatar.jpg";
 export default function About() {
+    const [user, loading, error] = useAuthState(auth);
+    const [editMode, setEditMode] = useState(false);
+
     const about = {
         firstName: "Hieu",
         lastName: "Nguyen",
@@ -51,7 +57,16 @@ export default function About() {
         <Container className="d-flex justify-content-center mt-4">
             <Card style={{ width: "50%", alignItems: "center" }}>
                 <Card.Header className="align-self-stretch">
-                    About {about.firstName}
+                    <span className="ms-2"> About {about.firstName}</span>
+                    {user && (
+                        <Button
+                            className="text-end"
+                            style={{ float: "right", fontSize: "12px" }}
+                            onClick={(e) => setEditMode(true)}
+                        >
+                            <PencilFill />
+                        </Button>
+                    )}
                 </Card.Header>
                 <Card.Img
                     variant="top"
