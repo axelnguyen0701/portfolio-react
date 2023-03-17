@@ -12,7 +12,7 @@ export default function NavBar() {
     }
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar expand="lg" style={{ backgroundColor: "#1e9d9d" }}>
             <Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
