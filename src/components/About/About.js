@@ -5,7 +5,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/auth";
 import Avatar from "./Avatar.jpg";
 export default function About() {
+    // eslint-disable-next-line no-unused-vars
     const [user, loading, error] = useAuthState(auth);
+    // eslint-disable-next-line no-unused-vars
     const [editMode, setEditMode] = useState(false);
 
     const about = {
