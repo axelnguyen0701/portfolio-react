@@ -27,3 +27,39 @@
         border-color: orange;
     }
 }
+
+.button {
+    background-color: #131313;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.816);
+    color: #151515;
+    /* animation: glowing 1500ms infinite; */
+}
+
+@keyframes glowing {
+    0% {
+        background-color: rgba(255, 255, 255, 0.816);
+        box-shadow: 0 0 3px #ffffff;
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0.816);
+        box-shadow: 0 0 40px #ffffff;
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0.816);
+        box-shadow: 0 0 3px #ffffff;
+    }
+}

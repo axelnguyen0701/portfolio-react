@@ -23,6 +23,7 @@ export default function Info() {
                 as={Link}
                 to="/project"
                 variant="dark"
+                className="button"
             >
                 See my projects
             </Button>
