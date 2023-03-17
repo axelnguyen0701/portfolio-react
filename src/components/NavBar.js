@@ -49,7 +49,11 @@ export default function NavBar() {
                             </Button>
                         </div>
                     ) : (
-                        <Button onClick={signInWithGoogle} variant="dark">
+                        <Button
+                            onClick={signInWithGoogle}
+                            variant="link"
+                            style={{ color: "black" }}
+                        >
                             Login as Hieu
                         </Button>
                     )}
