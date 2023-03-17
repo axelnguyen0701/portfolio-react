@@ -5,7 +5,7 @@ import {
     uploadBytesResumable,
 } from "firebase/storage";
 import { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Image } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { redirect } from "react-router-dom";
 import { auth } from "../../services/auth";
@@ -26,6 +26,7 @@ export default function ProjectForm() {
     const handleFilePicked = (e) => {
         setSelectedFile(e.target.files[0]);
     };
+    console.log(selectedFile);
 
     const uploadFile = () => {
         const storage = getStorage(app);
@@ -107,6 +108,12 @@ export default function ProjectForm() {
                 </Form.Group>
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Image of the project</Form.Label>
+                    {!!selectedFile && (
+                        <Image
+                            src={URL.createObjectURL(selectedFile)}
+                            style={{ maxWidth: "100%", display: "block" }}
+                        />
+                    )}
                     <Form.Control
                         type="file"
                         onChange={handleFilePicked}
