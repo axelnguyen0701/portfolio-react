@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import { Button, Nav } from "react-bootstrap";
 import { auth, signInWithGoogle, logout } from "../services/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-export default function NavBar() {
+import { useContext } from "react";
+import { ThemeContext } from "../context/themeContext";
+import { Sun, SunFill } from "react-bootstrap-icons";
+export default function NavBar({ setTheme }) {
     const [user, loading, error] = useAuthState(auth);
+    //theme context
+    const theme = useContext(ThemeContext);
 
     if (error) {
         return <div>{error}</div>;
@@ -57,6 +62,14 @@ export default function NavBar() {
                             Login as Hieu
                         </Button>
                     )}
+                    <Button
+                        onClick={() =>
+                            setTheme(theme === "dark" ? "light" : "dark")
+                        }
+                        variant={theme}
+                    >
+                        {theme === "dark" ? <SunFill /> : <Sun />}
+                    </Button>
                 </Nav>
             </Container>
         </Navbar>

@@ -10,7 +10,7 @@ function App() {
     return (
         <ThemeContext.Provider value={theme}>
             <div className="App">
-                <NavBar />
+                <NavBar setTheme={setTheme} />
                 <Outlet />
             </div>
         </ThemeContext.Provider>
