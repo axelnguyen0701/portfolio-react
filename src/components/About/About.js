@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import { Github, Linkedin, PencilFill } from "react-bootstrap-icons";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/auth";
 import Avatar from "./Avatar.jpg";
+import { ThemeContext } from "../../context/themeContext";
 export default function About() {
     // eslint-disable-next-line no-unused-vars
     const [user, loading, error] = useAuthState(auth);
     // eslint-disable-next-line no-unused-vars
     const [editMode, setEditMode] = useState(false);
+    //theme
+    const theme = useContext(ThemeContext);
 
     const about = {
         firstName: "Hieu",
@@ -56,8 +59,18 @@ export default function About() {
     ));
 
     return (
-        <Container className="d-flex justify-content-center mt-4">
-            <Card style={{ width: "50%", alignItems: "center" }}>
+        <Container
+            className={`d-flex justify-content-center pt-4 ${
+                theme === "dark" ? "bg-dark" : ""
+            }`}
+            fluid
+        >
+            <Card
+                style={{ width: "50%", alignItems: "center" }}
+                bg="dark"
+                text="light"
+                border="white"
+            >
                 <Card.Header className="align-self-stretch">
                     <span className="ms-2"> About {about.firstName}</span>
                     {user && (

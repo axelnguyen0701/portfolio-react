@@ -16,19 +16,28 @@ import { deleteProject } from "../../services/projects";
 import { Link, useLoaderData } from "react-router-dom";
 import { auth } from "../../services/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
+import { ThemeContext } from "../../context/themeContext";
 export default function Projects() {
     const projects = useLoaderData();
     const [show, setShow] = useState(false);
     // eslint-disable-next-line no-unused-vars
     const [user, loading, erorr] = useAuthState(auth);
+    // theme
+    const theme = useContext(ThemeContext);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const renderedProjects = projects.map((e) => (
-        <Card style={{ width: "100%" }} className="my-5" key={e.id}>
+        <Card
+            style={{ width: "100%" }}
+            className="my-5"
+            key={e.id}
+            bg={theme === "dark" ? "dark" : ""}
+            border={theme === "dark" ? "white" : ""}
+        >
             <Card.Header>
                 <strong>{e.name}</strong>
                 {user && (
@@ -96,7 +105,10 @@ export default function Projects() {
     ));
 
     return (
-        <Container>
+        <Container
+            className={`${theme === "dark" ? "bg-dark text-light" : ""}`}
+            fluid
+        >
             <h1>My Projects</h1>
             <Row>
                 <Col className="justify-content-center align-items-center d-flex flex-column">
