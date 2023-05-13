@@ -67,9 +67,9 @@ export default function About() {
         >
             <Card
                 style={{ width: "50%", alignItems: "center" }}
-                bg="dark"
-                text="light"
-                border="white"
+                bg={theme}
+                text={theme === "dark" ? "light" : "dark"}
+                border={theme === "dark" ? "white" : ""}
             >
                 <Card.Header className="align-self-stretch">
                     <span className="ms-2"> About {about.firstName}</span>
