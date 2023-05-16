@@ -44,7 +44,7 @@ export default function About() {
     };
 
     const renderedWorkPlace = about.worksAt.map((e) => (
-        <div className="p-2">
+        <div className="p-2" key={e.name}>
             <img
                 src={e.logo}
                 alt={`${e.name} logo`}
