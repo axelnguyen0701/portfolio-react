@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Outlet, useNavigation } from "react-router-dom";
 import { ThemeContext } from "./context/themeContext";
-import { Spinner } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 function App() {
     const [theme, setTheme] = useState("dark");
     const { state } = useNavigation();
@@ -13,12 +13,18 @@ function App() {
     const renderLoadingSpinner = () => {
         if (state === "loading")
             return (
-                <>
-                    <Spinner role="status" animation="grow">
-                        <span className="visually-hidden">Loading...</span>
-                    </Spinner>
-                    <div>Loading...</div>
-                </>
+                <Container
+                    className={`${
+                        theme === "dark" ? "bg-dark text-light" : ""
+                    } h-100 d-flex flex-column justify-content-center align-items-center`}
+                    fluid
+                >
+                    <div>
+                        <Spinner role="status" animation="grow">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div>
+                </Container>
             );
         return <Outlet />;
     };
