@@ -39,7 +39,9 @@ export default function Projects() {
             border={theme === "dark" ? "white" : ""}
         >
             <Card.Header>
-                <strong>{e.name}</strong>
+                <h2>
+                    <strong>{e.name}</strong>
+                </h2>
                 {user && (
                     <Dropdown className="d-inline mx-3">
                         <Dropdown.Toggle variant="secondary">
@@ -109,7 +111,6 @@ export default function Projects() {
             className={`${theme === "dark" ? "bg-dark text-light" : ""}`}
             fluid
         >
-            <h1>My Projects</h1>
             <Row>
                 <Col className="justify-content-center align-items-center d-flex flex-column">
                     {renderedProjects}
