@@ -31,79 +31,82 @@ export default function Projects() {
     const handleShow = () => setShow(true);
 
     const renderedProjects = projects.map((e) => (
-        <Card
-            style={{ width: "100%" }}
-            className="my-5"
-            key={e.id}
-            bg={theme === "dark" ? "dark" : ""}
-            border={theme === "dark" ? "white" : ""}
-        >
-            <Card.Header>
-                <h2>
-                    <strong>{e.name}</strong>
-                </h2>
-                {user && (
-                    <Dropdown className="d-inline mx-3">
-                        <Dropdown.Toggle variant="secondary">
-                            <ThreeDotsVertical />
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item as="button">
-                                <Link to={`/project/edit/${e.id}`}>
-                                    <PencilFill /> Edit
-                                </Link>
-                            </Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item
-                                as="button"
-                                onClick={handleShow}
-                                className="text-danger"
-                            >
-                                <Trash3Fill /> Delete
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                )}
-            </Card.Header>
-            <Card.Img src={e.url} alt="Project Screenshot" />
-            <hr />
-            <Card.Body>
-                <div className="rounded border text-start">
-                    <MDEditor.Markdown
-                        source={e.description}
-                        style={{ padding: "3rem" }}
-                    />
-                </div>
+        <Col key={e.id}>
+            <Card
+                style={{ width: "100%" }}
+                className="my-5"
+                bg={theme === "dark" ? "dark" : ""}
+                border={theme === "dark" ? "white" : ""}
+            >
+                <Card.Header>
+                    <h2>
+                        <strong>{e.name}</strong>
+                    </h2>
+                    {user && (
+                        <Dropdown className="d-inline mx-3">
+                            <Dropdown.Toggle variant="secondary">
+                                <ThreeDotsVertical />
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item as="button">
+                                    <Link to={`/project/edit/${e.id}`}>
+                                        <PencilFill /> Edit
+                                    </Link>
+                                </Dropdown.Item>
+                                <Dropdown.Divider />
+                                <Dropdown.Item
+                                    as="button"
+                                    onClick={handleShow}
+                                    className="text-danger"
+                                >
+                                    <Trash3Fill /> Delete
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    )}
+                </Card.Header>
+                <Card.Img src={e.url} alt="Project Screenshot" loading="" />
+                <hr />
+                <Card.Body>
+                    <div className="rounded border text-start">
+                        <MDEditor.Markdown
+                            source={e.description}
+                            style={{ padding: "3rem" }}
+                        />
+                    </div>
 
-                <div className="pb-3 mt-3   ">
-                    <Button href={e.link}>Go to app</Button>
-                </div>
-            </Card.Body>
-            {user && (
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Stop there!</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        Are you sure you want to delete project {e.name}?
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                        </Button>
-                        <Button
-                            variant="danger"
-                            onClick={async () => {
-                                await deleteProject({ params: { id: e.id } });
-                                handleClose();
-                            }}
-                        >
-                            Save Changes
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            )}
-        </Card>
+                    <div className="pb-3 mt-3   ">
+                        <Button href={e.link}>Go to app</Button>
+                    </div>
+                </Card.Body>
+                {user && (
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Stop there!</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            Are you sure you want to delete project {e.name}?
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button
+                                variant="danger"
+                                onClick={async () => {
+                                    await deleteProject({
+                                        params: { id: e.id },
+                                    });
+                                    handleClose();
+                                }}
+                            >
+                                Save Changes
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                )}
+            </Card>
+        </Col>
     ));
 
     return (
@@ -111,10 +114,8 @@ export default function Projects() {
             className={`${theme === "dark" ? "bg-dark text-light" : ""}`}
             fluid
         >
-            <Row>
-                <Col className="justify-content-center align-items-center d-flex flex-column">
-                    {renderedProjects}
-                </Col>
+            <Row xs={1} md={2} lg={3}>
+                {renderedProjects}
             </Row>
         </Container>
     );
