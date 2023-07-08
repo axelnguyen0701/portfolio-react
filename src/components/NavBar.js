@@ -49,6 +49,7 @@ export default function NavBar({ setTheme }) {
                                 variant="secondary"
                                 onClick={logout}
                                 className="mx-3"
+                                name="log-out"
                             >
                                 Log out
                             </Button>
@@ -58,6 +59,7 @@ export default function NavBar({ setTheme }) {
                             onClick={signInWithGoogle}
                             variant="link"
                             style={{ color: "black" }}
+                            name="log-in"
                         >
                             Login as Hieu
                         </Button>
@@ -67,6 +69,7 @@ export default function NavBar({ setTheme }) {
                             setTheme(theme === "dark" ? "light" : "dark")
                         }
                         variant={theme}
+                        name="dark-mode"
                     >
                         {theme === "dark" ? <SunFill /> : <Sun />}
                     </Button>
