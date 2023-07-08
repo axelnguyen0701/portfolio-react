@@ -1,6 +1,5 @@
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Avatar from "./ava.png";
 import background from "./background.svg";
 import "./Info.css";
 export default function Info() {
@@ -27,12 +26,6 @@ export default function Info() {
             >
                 See my projects
             </Button>
-            <img
-                src={Avatar}
-                alt="Avatar of Hieu Nguyen"
-                style={{ maxWidth: "25%", alignSelf: "center" }}
-                loading="lazy"
-            />
         </Container>
     );
 }
