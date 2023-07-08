@@ -65,7 +65,7 @@ export default function Projects() {
                         </Dropdown>
                     )}
                 </Card.Header>
-                <Card.Img src={e.url} alt="Project Screenshot" loading="" />
+                <Card.Img src={e.url} alt="Project Screenshot" loading="lazy" />
                 <hr />
                 <Card.Body>
                     <div className="rounded border text-start">

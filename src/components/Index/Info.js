@@ -31,6 +31,7 @@ export default function Info() {
                 src={Avatar}
                 alt="Avatar of Hieu Nguyen"
                 style={{ maxWidth: "25%", alignSelf: "center" }}
+                loading="lazy"
             />
         </Container>
     );
