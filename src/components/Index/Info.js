@@ -10,19 +10,19 @@ export default function Info() {
                 backgroundSize: "cover",
             }}
             fluid
-            className="h-100 d-flex flex-column justify-content-between typewriter"
+            className="h-100 d-flex flex-column justify-content-center typewriter"
         >
-            <div>Hello I am</div>
-            <h1>Axel Nguyen</h1>
-            <h2>Full-stack developer</h2>
-            <p>I fancy creating things from thin air</p>
+            <div style={{ fontSize: "28px" }}>Hi,</div>
+            <h1>I'm Axel Nguyen</h1>
+            <h4>Full-stack developer</h4>
+            <p className="mt-3">I fancy creating things from thin air</p>
 
             <Button
-                style={{ maxWidth: "25%", alignSelf: "center" }}
+                style={{ maxWidth: "50%", alignSelf: "center" }}
                 as={Link}
                 to="/project"
                 variant="dark"
-                className="button"
+                className="button mt-4"
             >
                 See my projects
             </Button>
