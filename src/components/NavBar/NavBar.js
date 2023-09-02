@@ -2,10 +2,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import { Button, Nav } from "react-bootstrap";
-import { auth, signInWithGoogle, logout } from "../services/auth";
+import { auth, signInWithGoogle, logout } from "../../services/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useContext } from "react";
-import { ThemeContext } from "../context/themeContext";
+import { ThemeContext } from "../../context/themeContext";
 import { Sun, SunFill } from "react-bootstrap-icons";
 export default function NavBar({ setTheme }) {
     const [user, loading, error] = useAuthState(auth);

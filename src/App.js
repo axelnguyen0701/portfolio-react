@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Outlet, useNavigation } from "react-router-dom";
@@ -9,6 +9,10 @@ import { Container, Spinner } from "react-bootstrap";
 function App() {
     const [theme, setTheme] = useState("dark");
     const { state } = useNavigation();
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-color-mode", theme);
+    }, [theme]);
 
     const renderLoadingSpinner = () => {
         if (state === "loading")
