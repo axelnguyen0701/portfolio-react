@@ -7,11 +7,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProjectForm from "./components/Projects/ProjectForm";
 import ErrorPage from "./components/Error/ErrorPage";
 import Info from "./components/Index/Info";
-import Projects from "./components/Projects/Projects";
 import { getProjects as projectsLoader } from "./services/projects";
 import { getProject as projectLoader } from "./services/projects";
 import ProjectEdit from "./components/Projects/ProjectEdit";
-import About from "./components/About/About";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -24,21 +22,13 @@ const router = createBrowserRouter([
             },
             {
                 path: "/",
-                element: <Info />,
-            },
-            {
-                path: "/project",
                 loader: projectsLoader,
-                element: <Projects />,
+                element: <Info />,
             },
             {
                 path: "/project/edit/:id",
                 loader: projectLoader,
                 element: <ProjectEdit />,
-            },
-            {
-                path: "/about",
-                element: <About />,
             },
         ],
     },

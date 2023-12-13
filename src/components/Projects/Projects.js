@@ -113,6 +113,7 @@ export default function Projects() {
         <Container
             className={`${theme === "dark" ? "bg-dark text-light" : ""}`}
             fluid
+            id="projects"
         >
             <Row xs={1} md={2} lg={3}>
                 {renderedProjects}
