@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/auth";
 import Avatar from "./Avatar.jpg";
 import { ThemeContext } from "../../context/themeContext";
+import "./About.css";
 export default function About() {
     // eslint-disable-next-line no-unused-vars
     const [user, loading, error] = useAuthState(auth);
@@ -66,7 +67,7 @@ export default function About() {
             fluid
         >
             <Card
-                style={{ width: "50%", alignItems: "center" }}
+                className="about-card"
                 bg={theme}
                 text={theme === "dark" ? "light" : "dark"}
                 border={theme === "dark" ? "white" : ""}

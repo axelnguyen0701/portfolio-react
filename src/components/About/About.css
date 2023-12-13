@@ -1,0 +1,10 @@
+.about-card {
+    width: 50%;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .about-card {
+        width: 100%;
+    }
+}
